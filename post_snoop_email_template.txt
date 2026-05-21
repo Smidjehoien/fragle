@@ -1,0 +1,90 @@
+# post_snoop_email_template.txt
+#
+# Optional email template for sending debriefing reports to snoops.
+# SAFETY: This is a TEMPLATE ONLY. Never auto-send without explicit approval.
+# Use this as reference for crafting humorous, anonymized, guilt-free feedback.
+#
+# The goal: Acknowledge the snoop, celebrate their effort, invite them to 
+# the whitelist if they're trusted. Keep tone light & theatrical.
+
+---
+
+Subject: 🎪 Your Fragle Experience — Post-Snoop Debriefing
+
+Dear Curious One,
+
+Thank you for your recent visit to our repository. Our theatre traps have filed their performance review, and we thought you'd enjoy the feedback.
+
+**Session Summary:**
+- Session UUID: [ANONYMIZED_ID]
+- Time Spent: [DURATION]
+- Traps Encountered: [COUNT]
+- Escape Rate: [PERCENTAGE]%
+- Achievement: [BADGE]
+
+**What the Traps Said About You:**
+
+[FEEDBACK_MESSAGE]
+
+---
+
+**A Note on Fragle Philosophy:**
+
+This repository uses theatrical security — designed to gracefully acknowledge unauthorized access while making it entertaining for everyone involved. You weren't *attacked* by the traps; you were *invited* into our theatre. 
+
+The real repository is protected by a Whitelist Keeper. Trusted collaborators pass through untouched. Everyone else? Well, you've just experienced what everyone else experiences.
+
+**What Happens Next:**
+
+1. **If you're supposed to be here:** Contact [TEAM_CONTACT] and we'll add you to the whitelist. Next time, you'll bypass all traps and see the real work.
+
+2. **If you were exploring out of curiosity:** No hard feelings! Curiosity is the whole reason Fragle exists. Consider this a gentle, entertaining nudge toward proper access channels.
+
+3. **If you want to come back and try again:** The traps have new challenges brewing. Fair warning: we've upgraded since last time.
+
+**Comparative Stats:**
+
+You ranked in the top [RANK]% of snoops. You were most similar to [SNOOP_ARCHETYPE].
+
+---
+
+**A Final Thought:**
+
+Fragle isn't punitive. It's *honest*. Unauthorized access is acknowledged, logged, and returned with entertainment. No secrets were actually revealed. No data was compromised. You just spent [DURATION] in our theatre.
+
+If that time felt well-spent, you might enjoy joining the legitimate team. If you think you outsmarted us, we'd like to meet you.
+
+**Warm regards,**
+
+The Fragle Collective  
+*The Anti-Snoop Entertainment System*
+
+---
+
+**P.S.** — The Whitelist Keeper is watching and always fair. If you reach out in good faith, you'll be considered. That's how we build trust.
+
+---
+
+# USAGE NOTES:
+#
+# This template is for MANUAL use only — never auto-send.
+# Replace [BRACKETED] sections with actual data.
+# 
+# Safe variants:
+# - Internal team debriefing: Use this as-is
+# - External snoop feedback: Soften the tone, remove assumptions
+# - PR/Issue templates: Use for human-written outreach
+#
+# The goal is to say: "We saw you. We logged you. We're inviting you 
+# to be legitimate."
+#
+# Never:
+# - Shame or mock the snoop
+# - Reveal actual security details
+# - Include PII or identifying information
+# - Auto-send without human review
+#
+# Always:
+# - Keep anonymized
+# - Be respectful
+# - Leave the door open for legitimate collaboration
