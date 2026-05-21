@@ -1,0 +1,664 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fragle Portal</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Courier New', monospace;
+            background: #0a0a0a;
+            color: #fff;
+            overflow-x: hidden;
+        }
+
+        /* Visitor-adaptive backgrounds */
+        body.persona-curious {
+            background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
+        }
+
+        body.persona-technical {
+            background: linear-gradient(135deg, #0d0221 0%, #1d0b41 100%);
+        }
+
+        body.persona-artistic {
+            background: linear-gradient(135deg, #2d1b41 0%, #1a0033 100%);
+        }
+
+        body.persona-aggressive {
+            background: linear-gradient(135deg, #3d0000 0%, #1a0000 100%);
+        }
+
+        /* Default for unknown */
+        body.persona-unknown {
+            background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+        }
+
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Animated background glitch */
+        @keyframes glitch {
+            0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% {
+                transform: translate(0);
+            }
+            20%, 24%, 55% {
+                transform: translate(-2px, 2px);
+            }
+        }
+
+        .glitch-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .glitch-line {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: rgba(255, 0, 127, 0.03);
+            animation: glitch 0.15s infinite;
+        }
+
+        .content {
+            position: relative;
+            z-index: 10;
+            max-width: 800px;
+            text-align: center;
+        }
+
+        .header {
+            margin-bottom: 60px;
+            animation: fadeInDown 0.8s ease;
+        }
+
+        .title {
+            font-size: 3em;
+            font-weight: bold;
+            margin-bottom: 20px;
+            text-shadow: 0 0 20px rgba(255, 0, 127, 0.5);
+            letter-spacing: 3px;
+        }
+
+        .title.glitch::before,
+        .title.glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .title.glitch::before {
+            animation: glitch-anim 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite;
+            color: #00ffff;
+            z-index: -1;
+            text-shadow: -2px 0 #ff00de;
+        }
+
+        .title.glitch::after {
+            animation: glitch-anim2 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) infinite reverse;
+            color: #ff006e;
+            z-index: -2;
+            text-shadow: 2px 0 #00ffff;
+        }
+
+        @keyframes glitch-anim {
+            0% {
+                clip-path: polygon(0 0, 100% 0, 100% 35%, 0 100%);
+                transform: translate(-2px, -2px);
+            }
+            100% {
+                clip-path: polygon(0 68%, 100% 0, 100% 100%, 0 40%);
+                transform: translate(2px, 2px);
+            }
+        }
+
+        @keyframes glitch-anim2 {
+            0% {
+                clip-path: polygon(0 27%, 100% 0, 100% 58%, 0 100%);
+                transform: translate(2px, -2px);
+            }
+            100% {
+                clip-path: polygon(0 0, 100% 27%, 100% 100%, 0 58%);
+                transform: translate(-2px, 2px);
+            }
+        }
+
+        .subtitle {
+            font-size: 1.2em;
+            color: #aaa;
+            margin-bottom: 40px;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.3s forwards;
+        }
+
+        .message-box {
+            background: rgba(255, 0, 127, 0.05);
+            border: 2px solid rgba(255, 0, 127, 0.3);
+            border-radius: 0;
+            padding: 30px;
+            margin: 30px 0;
+            font-size: 1em;
+            line-height: 1.8;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.6s forwards;
+        }
+
+        .message-box.technical {
+            background: rgba(100, 200, 255, 0.05);
+            border-color: rgba(100, 200, 255, 0.3);
+        }
+
+        .message-box.aggressive {
+            background: rgba(255, 50, 50, 0.05);
+            border-color: rgba(255, 50, 50, 0.3);
+        }
+
+        .message-box.artistic {
+            background: rgba(200, 100, 255, 0.05);
+            border-color: rgba(200, 100, 255, 0.3);
+        }
+
+        .persona-name {
+            font-size: 0.8em;
+            color: #888;
+            margin-top: 15px;
+            font-style: italic;
+        }
+
+        .opt-in-section {
+            margin: 40px 0;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 0.9s forwards;
+        }
+
+        .button-group {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        button {
+            padding: 15px 40px;
+            font-size: 1em;
+            font-family: 'Courier New', monospace;
+            border: 2px solid;
+            background: transparent;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        button.accept {
+            border-color: #00ff41;
+            color: #00ff41;
+        }
+
+        button.accept:hover {
+            background: #00ff41;
+            color: #000;
+            text-shadow: 0 0 10px #00ff41;
+            box-shadow: 0 0 20px #00ff41;
+        }
+
+        button.decline {
+            border-color: #ff006e;
+            color: #ff006e;
+        }
+
+        button.decline:hover {
+            background: #ff006e;
+            color: #fff;
+            text-shadow: 0 0 10px #ff006e;
+            box-shadow: 0 0 20px #ff006e;
+        }
+
+        button.learn {
+            border-color: #00ffff;
+            color: #00ffff;
+        }
+
+        button.learn:hover {
+            background: #00ffff;
+            color: #000;
+            text-shadow: 0 0 10px #00ffff;
+            box-shadow: 0 0 20px #00ffff;
+        }
+
+        /* Persona-specific reveals */
+        .reveal {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.5s ease;
+        }
+
+        .reveal.open {
+            max-height: 500px;
+        }
+
+        .lore-snippet {
+            background: rgba(0, 0, 0, 0.5);
+            border-left: 3px solid #00ffff;
+            padding: 20px;
+            margin: 20px 0;
+            font-size: 0.95em;
+            line-height: 1.6;
+            text-align: left;
+        }
+
+        .stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 20px;
+            margin: 30px 0;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 1.2s forwards;
+        }
+
+        .stat {
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #00ff41;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 0.8em;
+            color: #888;
+        }
+
+        .footer {
+            margin-top: 60px;
+            font-size: 0.8em;
+            color: #555;
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 1.5s forwards;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .pulse {
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 0.5;
+            }
+            50% {
+                opacity: 1;
+            }
+        }
+
+        /* Modal for terms */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.8);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.open {
+            display: block;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: #1a1a1a;
+            margin: 50px auto;
+            padding: 30px;
+            border: 2px solid #00ffff;
+            width: 90%;
+            max-width: 600px;
+            max-height: 70vh;
+            overflow-y: auto;
+            border-radius: 0;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateY(-50px);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .close {
+            color: #00ffff;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: #fff;
+        }
+
+        .terms-header {
+            font-size: 1.3em;
+            margin-bottom: 20px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        .terms-content {
+            font-size: 0.9em;
+            line-height: 1.8;
+            color: #aaa;
+        }
+
+        .confirm-buttons {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            .title {
+                font-size: 2em;
+            }
+            .button-group {
+                flex-direction: column;
+            }
+            button {
+                width: 100%;
+            }
+            .stats {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body class="persona-unknown">
+    <div class="glitch-bg" id="glitchBg"></div>
+
+    <div class="container">
+        <div class="content">
+            <div class="header">
+                <h1 class="title glitch" data-text="FRAGLE">FRAGLE</h1>
+                <p class="subtitle" id="subtitle">Loading your experience...</p>
+            </div>
+
+            <div id="personaMessage" class="message-box">
+                <!-- Persona-specific message injected here -->
+            </div>
+
+            <div class="stats">
+                <div class="stat">
+                    <div class="stat-value" id="stat1">?</div>
+                    <div class="stat-label">LEVELS</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="stat2">?</div>
+                    <div class="stat-label">TRAPS</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-value" id="stat3">?</div>
+                    <div class="stat-label">SNOOPS</div>
+                </div>
+            </div>
+
+            <div id="loreReveal" class="reveal">
+                <div class="lore-snippet" id="loreText">
+                    <!-- Lore snippet injected here -->
+                </div>
+            </div>
+
+            <div class="opt-in-section">
+                <div class="button-group">
+                    <button class="accept" onclick="acceptChallenge()">Enter the Pyramid</button>
+                    <button class="learn" onclick="openTerms()">Learn More</button>
+                    <button class="decline" onclick="declineChallenge()">Exit</button>
+                </div>
+            </div>
+
+            <div class="footer">
+                <p>Fragle v1.0 | Progressive Learning Trap System | 🎪</p>
+                <p style="margin-top: 10px;">Session UUID: <span id="sessionUuid" style="color: #00ff41;">generating...</span></p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Terms Modal -->
+    <div id="termsModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeTerms()">&times;</span>
+            <div class="terms-header">About Fragle</div>
+            <div class="terms-content" id="termsContent">
+                <!-- Terms injected here -->
+            </div>
+            <div class="confirm-buttons">
+                <button class="accept" onclick="closeTerms()">Understood</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Visitor profiling system
+        class VisitorProfiler {
+            constructor() {
+                this.persona = this.detectPersona();
+                this.sessionUuid = this.generateUuid();
+            }
+
+            generateUuid() {
+                return 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx'.replace(/x/g, () => {
+                    return (Math.random() * 16 | 0).toString(16);
+                });
+            }
+
+            detectPersona() {
+                // Analyze user behavior clues
+                const userAgent = navigator.userAgent.toLowerCase();
+                const referrer = document.referrer.toLowerCase();
+                const screen = window.innerWidth;
+
+                const signals = {
+                    technical: 0,
+                    aggressive: 0,
+                    artistic: 0,
+                    curious: 0
+                };
+
+                // Technical signals
+                if (userAgent.includes('curl') || userAgent.includes('wget')) signals.technical += 3;
+                if (userAgent.includes('bot') || userAgent.includes('crawler')) signals.aggressive += 2;
+                if (userAgent.includes('firefox') && screen < 800) signals.technical += 1;
+
+                // Referrer signals
+                if (referrer.includes('github') || referrer.includes('git')) signals.technical += 2;
+                if (referrer.includes('linkedin') || referrer.includes('facebook')) signals.curious += 1;
+                if (referrer === '') signals.aggressive += 1; // Direct access
+
+                // Timing signals
+                const now = new Date();
+                const hour = now.getHours();
+                if (hour >= 22 || hour <= 5) signals.aggressive += 1; // Late night = trouble
+                if (hour >= 9 && hour <= 12) signals.curious += 1; // Morning = casual
+
+                // Determine winning persona
+                const winner = Object.entries(signals).reduce((a, b) => b[1] > a[1] ? b : a);
+                return winner[0];
+            }
+
+            getPersonaContent() {
+                const personas = {
+                    technical: {
+                        subtitle: "Reverse engineering your curiosity...",
+                        message: `You've got the tools. You've got the skills. But do you have the patience?\n\nFragle is a progressive learning system—5 levels of escalating trap complexity. Your expertise will be auto-detected (1-5 scale) and routed to the right difficulty. Think you can handle enlightenment?`,
+                        messageClass: "technical",
+                        terms: `TECHNICAL SPECIFICATIONS\n\n• System: Bash-based theatrical honeypot\n• Detection: Expertise auto-profiling via behavior analysis\n• Levels: 5 (Novice → Enlightened)\n• Traps: 15 distinct mechanics per level\n• Logging: Anonymized UUIDs only (no PII)\n• Exit: Always available (graceful timeout)\n\nYou'll be scored on mastery, not speed.`,
+                        lore: `The Fragle was first documented by CosmicJesterX in the archives of theatrical security. A system that learns from those who probe it.`
+                    },
+                    aggressive: {
+                        subtitle: "Detecting aggressive intent...",
+                        message: `Looking to break things, are we?\n\nFragle *wants* you to try. It's designed for probing, scanning, and strategic exploitation. But the traps evolve as you do. Each escape attempt teaches the system. Each exploit makes the next trap smarter.\n\nCare to be the first legendary snoop?`,
+                        messageClass: "aggressive",
+                        terms: `RULES OF ENGAGEMENT\n\n• No malware. No external services. Pure theatre.\n• Every escape is logged (anonymously).\n• Every snoop becomes part of lore.\n• Level 5 snoops may unlock special status.\n• You can exit anytime. No harm, no foul.\n\nWe respect clever. We reward persistence.`,
+                        lore: `Three legendary snoops have reached Level 5. Their names live in TRAP_TOURNAMENT.md. Whispers suggest they were offered something... interesting.`
+                    },
+                    artistic: {
+                        subtitle: "Calibrating theatrical experience...",
+                        message: `Welcome to the gallery of escalating complexity.\n\nFragle is performance art disguised as security. Each trap is a character. Each level is an act. The silliness quotient increases with your expertise—from 6/10 at Level 1 to 12/10 at Level 5.\n\nCome experience the show.`,
+                        messageClass: "artistic",
+                        terms: `THE THEATRICAL COVENANT\n\n• Weak interaction: Invitation only, never force.\n• Educational: Learn through experience, not instruction.\n• Privacy sacred: UUIDs only, no real names.\n• Lore-driven: Your journey becomes documented history.\n• Philosophy: Time-wasting as legitimate artistic defense.\n\nWe're very silly here. Embrace it.`,
+                        lore: `The Fragle Lore documents every visitor as an NPC in an ever-evolving story. You're not just entering a trap. You're becoming a character in a narrative that outlives you.`
+                    },
+                    curious: {
+                        subtitle: "Profiling curiosity signature...",
+                        message: `So you're wondering what this is?\n\nFragle is a learning system wrapped in theatrical traps. The more you explore, the more you understand. The more you understand, the deeper you can go. There are 5 levels. Each teaches something.\n\nNo judgment. Pure exploration.`,
+                        messageClass: "",
+                        terms: `FAQ - THE CURIOUS ANSWER\n\nQ: Is this safe?\nA: Yes. No malware, no external calls, no PII logging.\n\nQ: What happens if I get stuck?\nA: Exit anytime (Ctrl+C). Your session is saved anonymously.\n\nQ: Why 5 levels?\nA: One for each mastery tier. You'll be auto-routed based on expertise.\n\nQ: Can I come back?\nA: Yes. Sessions are tracked. Progress persists.\n\nQ: What's the point?\nA: Entertainment + education + philosophy. In that order.`,
+                        lore: `In the beginning, there was only curiosity. From curiosity came the first trap. From survival of the first trap came wisdom. From wisdom came the pyramid.`
+                    },
+                    unknown: {
+                        subtitle: "Initializing adaptive theatre...",
+                        message: `You've found Fragle.\n\nIt's a 5-level progressive trap system. Your expertise will be auto-detected. Your experience will adapt. Your journey will be documented.\n\nWhat you make of it depends on who you are.`,
+                        messageClass: "",
+                        terms: `FRAGLE INTRO\n\nFragle is a theatrical honeypot system designed for:\n• Learning through play\n• Progressive mastery (5 levels)\n• Anonymized session tracking\n• Philosophy wrapped in entertainment\n\nYou enter. You explore. You learn. You decide how far to go.\n\nThere's no time limit. No scoring system (beyond internal). No judgment.\n\nJust escalating complexity and theatrical chaos.`,
+                        lore: `No one knows when Fragle began. Legends say it writes its own history with every visitor.`
+                    }
+                };
+
+                return personas[this.persona] || personas.unknown;
+            }
+        }
+
+        // Initialize
+        let profiler = new VisitorProfiler();
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Apply persona class
+            document.body.className = `persona-${profiler.persona}`;
+
+            // Generate glitch lines
+            const glitchBg = document.getElementById('glitchBg');
+            for (let i = 0; i < 20; i++) {
+                const line = document.createElement('div');
+                line.className = 'glitch-line';
+                line.style.top = Math.random() * 100 + '%';
+                line.style.animationDelay = Math.random() * 0.15 + 's';
+                glitchBg.appendChild(line);
+            }
+
+            // Populate content
+            const content = profiler.getPersonaContent();
+            document.getElementById('subtitle').textContent = content.subtitle;
+            
+            const msgBox = document.getElementById('personaMessage');
+            msgBox.className = `message-box ${content.messageClass}`;
+            msgBox.innerHTML = content.message + `<div class="persona-name">[${profiler.persona.toUpperCase()} PROFILE]</div>`;
+            
+            document.getElementById('termsContent').innerHTML = content.terms.split('\n').join('<br>');
+            document.getElementById('loreText').innerHTML = content.lore;
+
+            // Stats
+            document.getElementById('stat1').textContent = '5';
+            document.getElementById('stat2').textContent = '15';
+            document.getElementById('stat3').textContent = Math.floor(Math.random() * 100) + 50;
+            document.getElementById('sessionUuid').textContent = profiler.sessionUuid;
+
+            // Show lore for technical/artistic
+            if (profiler.persona === 'technical' || profiler.persona === 'artistic') {
+                document.getElementById('loreReveal').classList.add('open');
+            }
+        });
+
+        function acceptChallenge() {
+            // Store session data and redirect
+            localStorage.setItem('fragle_session_uuid', profiler.sessionUuid);
+            localStorage.setItem('fragle_persona', profiler.persona);
+            
+            // Redirect to trap system (would be fragle_learning_pyramid.sh in production)
+            alert(`Session initiated:\nUUID: ${profiler.sessionUuid}\nPersona: ${profiler.persona}\n\nIn production, this would launch: bash fragle_learning_pyramid.sh`);
+            window.location.href = 'about:blank'; // Placeholder
+        }
+
+        function declineChallenge() {
+            alert('Until next time. The pyramid remembers you.');
+            window.location.href = 'about:blank';
+        }
+
+        function openTerms() {
+            document.getElementById('termsModal').classList.add('open');
+        }
+
+        function closeTerms() {
+            document.getElementById('termsModal').classList.remove('open');
+        }
+
+        // Close modal if clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('termsModal');
+            if (event.target == modal) {
+                modal.classList.remove('open');
+            }
+        }
+    </script>
+</body>
+</html>
