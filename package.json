@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "build": "node --check index.js && node -e \"console.log('✨ Fragle polished its gears; nothing needed bundling today.')\"",
     "start": "node index.js",
     "dev": "nodemon index.js",
     "lint": "eslint .",
