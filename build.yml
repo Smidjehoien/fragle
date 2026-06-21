@@ -1,0 +1,135 @@
+name: Build
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.number || github.ref }}
+  cancel-in-progress: true
+
+env:
+  RENOVATE_VERSION: 39.19.1 # renovate: datasource=docker depName=renovate packageName=ghcr.io/renovatebot/renovate
+
+jobs:
+  prepare:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          show-progress: false
+
+      - name: 📥 Setup Node.js
+        uses: ./.github/actions/setup-node
+        with:
+          save-cache: true
+
+  commitlint:
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'pull_request' || github.repository_owner != github.event.pull_request.head.repo.owner.login }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          show-progress: false
+          filter: blob:none
+
+      - name: Lint commit messages
+        uses: wagoid/commitlint-github-action@v6
+        continue-on-error: true
+
+  lint:
+    needs: [prepare]
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'pull_request' || github.repository_owner != github.event.pull_request.head.repo.owner.login }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          show-progress: false
+
+      - name: 📥 Setup Node.js
+        uses: ./.github/actions/setup-node
+
+      - name: Lint
+        run: pnpm lint
+
+  e2e:
+    needs: [prepare]
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'pull_request' || github_repository_owner != github.event.pull_request.head.repo.owner.login }}
+
+    strategy:
+      fail-fast: false
+      matrix:
+        configurationFile:
+          - example/renovate-config.js
+          - example/renovate-config.json
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          show-progress: false
+
+      - name: 📥 Setup Node.js
+        uses: ./.github/actions/setup-node
+
+      - name: Build
+        run: pnpm build
+
+      - name: Configure renovate token
+        run: |
+          if [[ "${RENOVATE_TOKEN}" != ""  ]]; then
+            echo "RENOVATE_TOKEN=${RENOVATE_TOKEN}" >> $GITHUB_ENV
+          else
+            echo "RENOVATE_TOKEN=${GITHUB_TOKEN}" >> $GITHUB_ENV
+          fi
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          RENOVATE_TOKEN: ${{ secrets.RENOVATE_TOKEN }}
+
+      - name: Renovate test
+        uses: ./
+        env:
+          LOG_LEVEL: debug
+        with:
+          configurationFile: ${{ matrix.configurationFile }}
+
+      - name: Renovate test with entrypoint
+        uses: ./
+        env:
+          LOG_LEVEL: debug
+        with:
+          configurationFile: ${{ matrix.configurationFile }}
+          renovate-version: ${{ env.RENOVATE_VERSION }}
+          docker-cmd-file: example/entrypoint.sh
+          docker-user: root
+
+  release:
+    needs: [lint, commitlint, e2e]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Setup Git user
+        shell: bash
+        run: |
+          git config --global core.autocrlf false
+          git config --global core.symlinks true
+          git config --global user.name "MrClean[bot]"
+          git config --global user.email "MrClean[bot]@users.noreply.github.com"
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+          ref: ${{ github.ref }}
+          show-progress: false
+          filter: blob:none
+
+      - name: Fetch PR (if needed)
+        if: ${{ github.event_name == 'pull_request' }}
+        run: git fetch origin +${{ github.sha }}:${{ github.ref }}

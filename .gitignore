@@ -1,2 +1,14 @@
-application/cache/*
-application/logs/*
+# Node modules
+node_modules/
+
+# Logs
+logs/*.log
+
+# Temporary files
+/tmp/fragle_*
+
+# Decoy directory (optional - can be regenerated)
+.secrets_do_not_look/
+
+# Lock files (optional)
+package-lock.json

@@ -1,0 +1,59 @@
+# Cursor Rules for Fragle
+
+## Bash Best Practices
+- Shellcheck compliant (pass shellcheck before commit)
+- Shebang: `#!/bin/bash` (explicit, not `/bin/sh`)
+- Strict mode: `set -euo pipefail` for safety
+- Error handling: Trap EXIT, validate inputs
+- Comments: Explain trap logic, not obvious stuff
+
+## File Organization
+- Root scripts: Executable, well-named, self-contained
+- Bin utilities: Reusable functions, sourced by root scripts
+- Documentation: README → MASTER_README → ANTI_SNOOP_README
+- Keep trap mechanics documented as comedy, not secrets
+
+## Trap Design Philosophy
+- Time-waste > data exposure (that's the whole point)
+- Whitelist always works (don't accidentally lock out team)
+- Logging captures performance (audit trail of trolling)
+- Fake files are honeypot (never real secrets here!)
+- Escalation is gradual (annoy, don't traumatize)
+
+## Node.js Secondary Features
+- Keep lightweight (themed wrapper, not main runtime)
+- npm scripts: lint + format on prepare
+- ESLint + Prettier enforced
+- Express endpoints optional (don't bloat if not needed)
+
+## Security & Sanity
+- Never commit real secrets (ever!)
+- Test whitelist thoroughly before merge
+- Don't accidentally trigger own traps in prod
+- Document what each trap does (for team debugging)
+- Fake passwords should be obviously fake (hunter2, etc.)
+
+## Git Workflow
+- Feature branches: `trap/<name>`, `feature/<name>`, `refactor/<name>`
+- Commits: Atomic, reference trap name or enhancement
+- PRs: Link ANTI_SNOOP_README.md sections + explain the joke
+- Pre-commit: shellcheck *.sh passes
+
+## Testing
+- Test as intruder would (follow trap logic)
+- Verify whitelist works (trusted users bypass)
+- Check logging (performance is documented)
+- No skipped tests without justification
+- Document escape artist attempts (they're valuable!)
+
+## Documentation
+- Update ANTI_SNOOP_README.md when adding traps
+- Keep MASTER_README.md synchronized
+- Explain trap mechanics in comments (for team)
+- Never explain the joke to snoops!
+
+## Comedy is Security
+- Entertainment value IS the defense mechanism
+- Trolling is professional here (documented, logged, theatrical)
+- Time-waste = effective security posture
+- Preserve the fourth wall (traps work because snoops take them seriously)
