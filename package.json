@@ -1,8 +1,9 @@
 {
   "name": "MrClean",
   "version": "1.0.0",
-  "description": "",
+  "description": "✨ theatrical trap machinery (snoops beware) ✨",
   "main": "index.js",
+  "_silly": "npm install ran on 2026-06-29. prettier was feeling fancy but eslint was too cool for major versions. express stayed humble.",
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon index.js",
