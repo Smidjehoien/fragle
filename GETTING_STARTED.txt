@@ -1,0 +1,342 @@
+================================================================================
+                    FRAGLE THEATRE v2.0 - QUICK START MANUAL
+                              (Local & Offline)
+================================================================================
+
+Welcome to the theatre. This is your guide.
+
+================================================================================
+                              WHAT IS FRAGLE?
+================================================================================
+
+Fragle is a theatrical trap system. 5 levels of escalating silliness. Persona
+detection. Reality bending. Philosophy happening. Questions asked.
+
+You enter. You engage. You remember.
+
+================================================================================
+                            GETTING STARTED (RIGHT NOW)
+================================================================================
+
+1. Open terminal:
+   - macOS: Command + Space, type "Terminal"
+   - Linux: Ctrl + Alt + T
+
+2. Navigate to theatre:
+   cd /home/nisse/fragle
+
+3. Enter shell UI:
+   bash fragle_tui.sh
+
+4. Choose what you want:
+   - Enter a trap (Levels 1-5)
+   - Read the lore (wild scripture)
+   - View your sessions (history of chaos)
+   - See your persona (who are you, really?)
+   - Launch web UI (browser version)
+   - Ask the Oracle (cosmic wisdom)
+   - View Top 100 Leaderboard (what others did)
+   - Exit (but you'll return)
+
+That's it. You're in.
+
+================================================================================
+                              MENU OPTIONS (DETAILED)
+================================================================================
+
+OPTION 1: ENTER A TRAP
+  - Choose level 1, 2, 3, 4, or 5
+  - Each level escalates in chaos
+  - Silliness increases (6/10 → 12/10)
+  - Your actions are logged anonymously
+  - Duration tracked, persona recorded
+  
+  What happens:
+  • Loading screens with theatrical effects
+  • Persona-aware messages
+  • Silliness score calculated
+  • Activity saved to leaderboard
+  • You exit with a new memory
+
+OPTION 2: READ THE LORE
+  - Unfiltered, unedited scripture
+  - Written by people who are UNWELL
+  - Explains the philosophy
+  - May change how you see things
+  
+OPTION 3: SESSION HISTORY
+  - See all your previous visits
+  - Anonymous but yours
+  - Track your persona journey
+  - View timestamps and trap levels
+
+OPTION 4: PERSONA PROFILE
+  - Who are you according to the theatre?
+  - Technical? Chaotic? Aggressive? Artistic?
+  - Detected from your environment:
+    * Shell type (bash, zsh, fish?)
+    * SSH presence (remote access?)
+    * Time of day (late night = aggressive)
+    * CPU load (busy system = chaotic)
+  - Your persona guides the experience
+
+OPTION 5: LAUNCH WEB UI
+  - Same theatre, in your browser
+  - http://localhost:3000
+  - More visual, more glitchy
+  - Click-based instead of text
+  - Starts Node.js server in background
+
+OPTION 6: ASK THE ORACLE
+  - Cosmic joke generator
+  - Wisdom disguised as nonsense
+  - Each call is logged
+  - Answers only you will understand
+
+OPTION 7: TOP 100 LEADERBOARD
+  - Anonymous theatre statistics
+  - Most popular personas
+  - Most unhinged moments
+  - Trap level popularity
+  - Live activity feed
+  - YOUR data contributes (no identity exposed)
+
+OPTION 8: EXIT
+  - Leave the theatre
+  - Session saved anonymously
+  - You will return
+
+================================================================================
+                            PRIVACY GUARANTEE
+================================================================================
+
+Everything you do is ANONYMOUS. Here's what's tracked:
+
+TRACKED (Safe):
+  ✓ Timestamp (when you entered)
+  ✓ Persona type (chaotic, technical, etc.)
+  ✓ Trap level (1-5)
+  ✓ Silliness score (6-12)
+  ✓ Duration (how long you stayed)
+  ✓ UUID hash (only locally)
+
+NEVER TRACKED (Protected):
+  ✗ Your name
+  ✗ Your IP address
+  ✗ Your hostname
+  ✗ Your file paths
+  ✗ Your system config
+  ✗ Your keyboard patterns
+  ✗ Your real identity
+
+Your session UUID is NEVER sent anywhere without your permission.
+You can clear all logs anytime:
+
+  cd /home/nisse/fragle
+  ./fragle_scoreboard.sh clear
+
+Theatrical amnesia. Instant.
+
+================================================================================
+                          ADVANCED: LEADERBOARD
+================================================================================
+
+The scoreboard tracks anonymous activity across all users. You can:
+
+VIEW LEADERBOARD (From menu):
+  → Option 7 in main theatre menu
+
+VIEW STATS (Terminal):
+  cd /home/nisse/fragle
+  ./fragle_scoreboard.sh stats
+
+VIEW TOP PERSONAS:
+  ./fragle_scoreboard.sh personas
+
+VIEW MOST UNHINGED MOMENTS:
+  ./fragle_scoreboard.sh silliness
+
+VIEW ACTIVITY FEED (Last 20 events):
+  ./fragle_scoreboard.sh feed 20
+
+EXPORT STATS FOR API:
+  ./fragle_scoreboard.sh export my_stats.json
+
+CLEAR ALL LOCAL LOGS:
+  ./fragle_scoreboard.sh clear
+
+Your activities contribute anonymously to the theatre's collective history.
+You are part of something larger. But nobody knows who you are.
+
+================================================================================
+                          ADVANCED: WEB THEATRE
+================================================================================
+
+If you want the browser version (more visual, same chaos):
+
+1. From main menu, choose Option 5 (Launch Web UI)
+   - Starts Node.js server automatically
+   - Opens http://localhost:3000
+
+2. Or start manually:
+   cd /home/nisse/fragle
+   npm start
+   # Then open: http://localhost:3000
+
+3. Same experience, different interface:
+   - Click-based menus
+   - Animated loading screens
+   - Glitch effects on personas
+   - WebSocket real-time updates
+   - Looks like a broken website (intentional)
+
+4. To stop:
+   - Press Ctrl+C in terminal
+
+================================================================================
+                        ADVANCED: NATIVE .APP (macOS)
+================================================================================
+
+Want to run Fragle as a native Mac application?
+
+BUILD THE APP:
+  cd /home/nisse/fragle
+  npm install          # First time only
+  npm run build
+
+RESULT:
+  - dist/Fragle Theatre.app (drag to Applications)
+  - dist/Fragle Theatre.dmg (installer)
+
+RUN DIRECTLY:
+  npm run electron
+
+Same theatre, packaged as a native app.
+All data stays on your machine.
+All tracking remains anonymous.
+
+================================================================================
+                        TROUBLESHOOTING
+================================================================================
+
+SHELL UI WON'T START:
+  Q: "command not found: bash"
+  A: Make sure you're in the fragle directory:
+     cd /home/nisse/fragle
+
+  Q: "Permission denied"
+  A: Make script executable:
+     chmod +x fragle_tui.sh
+     bash fragle_tui.sh
+
+WEB UI WON'T LAUNCH:
+  Q: "npm: command not found"
+  A: Node.js not installed. Web UI is optional.
+     Shell theatre works without it.
+
+  Q: "Port 3000 already in use"
+  A: Kill the existing process:
+     lsof -i :3000
+     kill -9 <PID>
+     npm start
+
+LEADERBOARD NOT SHOWING:
+  Q: "Scoreboard not found"
+  A: Make sure you're in fragle directory:
+     cd /home/nisse/fragle
+     ./fragle_scoreboard.sh show
+
+  Q: "No activity yet"
+  A: Seed test data:
+     bash fragle_demo_scoreboard.sh
+
+LOSING SESSIONS:
+  Q: "My history disappeared"
+  A: Check if logs were cleared:
+     ls -la /home/nisse/fragle/.fragle_anon_data/
+     ls -la /home/nisse/fragle/.fragle_scoreboard/
+
+  To restore: sessions are per-run. Each entry creates a new UUID.
+
+================================================================================
+                            QUICK REFERENCE
+================================================================================
+
+LAUNCH COMMANDS:
+  Shell UI:           bash fragle_tui.sh
+  Web UI:             npm start
+  Electron App:       npm run electron
+  Leaderboard:        ./fragle_scoreboard.sh show
+  Stats (JSON):       ./fragle_scoreboard.sh stats
+  Test Data:          bash fragle_demo_scoreboard.sh
+  Full System Test:   bash fragle_integration_test.sh
+
+USEFUL FILES:
+  Main script:        ~/fragle/fragle_tui.sh
+  Scoreboard script:  ~/fragle/fragle_scoreboard.sh
+  Web backend:        ~/fragle/fragle_web.js
+  Web frontend:       ~/fragle/public/
+  Docs:               ~/fragle/README_v2.md
+  Leaderboard guide:  ~/fragle/SCOREBOARD_GUIDE.md
+  Evolution notes:    ~/fragle/EVOLUTION_COMPLETE.md
+
+LOCAL DATA STORAGE:
+  Sessions:           ~/.fragle_anon_data/
+  Leaderboard:        ~/.fragle_scoreboard/
+  Web logs:           /tmp/fragle_web.log
+
+================================================================================
+                            KEY PHILOSOPHY
+================================================================================
+
+WIMP = Weak Interaction, Misdirection, Philosophy
+
+This theatre:
+  • Wastes your time entertainingly
+  • Teaches through absurdism
+  • Protects your privacy absolutely
+  • Makes you question reality
+  • Is unforgettable
+
+Core principle: "bleech their brains if they keep on"
+(Let systems and people be chaotic while learning)
+
+You are not a data point. You are a silhouette. A moment. A memory.
+The theatre remembers you. But only as a persona. Only as a score.
+
+================================================================================
+                            FINAL WORDS
+================================================================================
+
+The theatre is always open.
+
+You can visit anytime. Exit anytime. Clear anytime. Return anytime.
+
+Each visit is yours alone. Yet you are part of something larger.
+
+The leaderboard shows: thousands of visits. Millions of moments.
+But no one knows who they are. Just personas. Just silliness scores.
+
+You are among friends. Anonymous friends. Theatrical friends.
+
+Welcome.
+
+The show awaits.
+
+================================================================================
+                          READY TO ENTER?
+================================================================================
+
+Open terminal and type:
+
+  cd /home/nisse/fragle && bash fragle_tui.sh
+
+Then choose. The theatre will guide you.
+
+Your journey begins in the next keystroke.
+
+Press Enter when you're ready.
+
+🎭
+
+================================================================================
