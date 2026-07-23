@@ -1,0 +1,25 @@
+# Fragle Repository Whitelist
+# Users listed here are welcome and won't trigger anti-snoop measures
+
+# Owner (always allowed)
+pinky
+
+# Trusted friends and collaborators
+# Add usernames below (one per line, no spaces)
+
+# Example entries:
+# alice
+# bob
+# charlie
+
+# To add someone:
+# 1. Ask their username with: whoami
+# 2. Add it to this list
+# 3. Save the file
+
+# Notes:
+# - Lines starting with # are comments
+# - Blank lines are ignored
+# - Usernames are case-sensitive
+alice
+bob

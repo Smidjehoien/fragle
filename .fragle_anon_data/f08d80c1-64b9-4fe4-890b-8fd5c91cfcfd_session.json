@@ -1,0 +1,12 @@
+{
+  "session_uuid": "f08d80c1-64b9-4fe4-890b-8fd5c91cfcfd",
+  "timestamp": "2026-07-16T17:19:19Z",
+  "persona": "technical",
+  "trap_level": 0,
+  "silliness_score": 11,
+  "interaction_count": 0,
+  "duration_seconds": 253,
+  "oracle_queries": 1,
+  "exit_reason": "user_exit",
+  "hash_id": "fragle_e7d5a6dcddbe"
+}

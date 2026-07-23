@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🎭 Fragle Theatre - Absolutely Unhinged Edition</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div id="container" class="container">
+        <!-- Loading Screen -->
+        <div id="loading-screen" class="screen loading-screen active">
+            <div class="theatre-loader">
+                <div class="loader-content">
+                    <div class="spinner"></div>
+                    <h1>🎪 FRAGLE THEATRE AWAKENS 🎪</h1>
+                    <p class="subtitle">Invoking theatrical systems...</p>
+                    <p class="status-text" id="loading-status">Reality initialization: 0%</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Menu -->
+        <div id="main-menu" class="screen main-menu">
+            <header class="header">
+                <h1>🎭 FRAGLE THEATRE</h1>
+                <p class="tagline">"Who are you? Better question: WHO ARE YOU?"</p>
+            </header>
+
+            <div class="menu-content">
+                <div class="persona-display" id="persona-display">
+                    <p>Detecting your essence...</p>
+                </div>
+
+                <nav class="main-nav">
+                    <button class="menu-btn btn-primary" data-screen="level-select">
+                        <span class="emoji">1️⃣</span>
+                        <span>Enter Level</span>
+                        <span class="hint">Choose your silliness quota</span>
+                    </button>
+                    <button class="menu-btn btn-secondary" data-screen="lore">
+                        <span class="emoji">📖</span>
+                        <span>View Lore</span>
+                        <span class="hint">The architects are UNWELL</span>
+                    </button>
+                    <button class="menu-btn btn-secondary" id="oracle-btn">
+                        <span class="emoji">🔮</span>
+                        <span>Ask the Oracle</span>
+                        <span class="hint">Cosmic joke generator</span>
+                    </button>
+                    <button class="menu-btn btn-secondary" id="about-btn">
+                        <span class="emoji">ℹ️</span>
+                        <span>About</span>
+                        <span class="hint">What even is this?</span>
+                    </button>
+                </nav>
+            </div>
+
+            <footer class="footer">
+                <p class="chaos-meter">Chaos Level: <span id="chaos-level">CRITICAL</span></p>
+            </footer>
+        </div>
+
+        <!-- Level Selection Screen -->
+        <div id="level-select" class="screen level-select">
+            <header class="header">
+                <h2>SELECT YOUR TRAP INTENSITY</h2>
+                <p class="subtitle">(There Is No Exit)</p>
+            </header>
+
+            <div class="levels-grid">
+                <div class="level-card" data-level="1">
+                    <div class="level-number">1</div>
+                    <div class="level-title">NOVICE</div>
+                    <div class="level-desc">Graphics trickery • ASCII fever dreams</div>
+                    <div class="silliness">Silliness: 6/10</div>
+                </div>
+
+                <div class="level-card" data-level="2">
+                    <div class="level-number">2</div>
+                    <div class="level-title">INTERMEDIATE</div>
+                    <div class="level-desc">Logic puzzles • Your brain is a pretzel</div>
+                    <div class="silliness">Silliness: 7/10</div>
+                </div>
+
+                <div class="level-card" data-level="3">
+                    <div class="level-number">3</div>
+                    <div class="level-title">ADVANCED</div>
+                    <div class="level-desc">Meta-reality • The trap questions itself</div>
+                    <div class="silliness">Silliness: 8/10</div>
+                </div>
+
+                <div class="level-card" data-level="4">
+                    <div class="level-number">4</div>
+                    <div class="level-title">EXPERT</div>
+                    <div class="level-desc">Consciousness tests • What is you?</div>
+                    <div class="silliness">Silliness: 10/10</div>
+                </div>
+
+                <div class="level-card" data-level="5">
+                    <div class="level-number">5</div>
+                    <div class="level-title">ENLIGHTENED</div>
+                    <div class="level-desc">The theatre IS the trap IS you</div>
+                    <div class="silliness">Silliness: 12/10</div>
+                </div>
+            </div>
+
+            <div class="screen-footer">
+                <button class="btn-secondary" data-screen="main-menu">← Back</button>
+            </div>
+        </div>
+
+        <!-- Trap Experience Screen -->
+        <div id="trap-experience" class="screen trap-experience">
+            <header class="header">
+                <h2>⚡ TRAP SEQUENCE INITIATED ⚡</h2>
+                <p class="subtitle" id="trap-level-display">Level: ?</p>
+            </header>
+
+            <div class="trap-content">
+                <div class="trap-info" id="trap-info"></div>
+                
+                <div class="trap-progress-container">
+                    <div class="progress-bar">
+                        <div class="progress-fill" id="progress-fill"></div>
+                    </div>
+                    <div class="progress-text" id="progress-text">Initializing...</div>
+                </div>
+
+                <div class="trap-messages" id="trap-messages">
+                    <div class="message">🎭 Activating theatrical machinery...</div>
+                    <div class="message">🎪 Loading persona-aware chaos vectors...</div>
+                    <div class="message">🌀 Engaging reality destabilization...</div>
+                </div>
+
+                <div class="trap-status" id="trap-status">
+                    Timeline: Branching | Sanity: Fluctuating | Confidence: Eroding
+                </div>
+            </div>
+
+            <div class="screen-footer">
+                <button class="btn-secondary" id="escape-trap">← Escape Trap</button>
+            </div>
+        </div>
+
+        <!-- Lore Screen -->
+        <div id="lore" class="screen lore-screen">
+            <header class="header">
+                <h2>THE FRAGLE SCRIPTURE</h2>
+                <p class="subtitle">(Unedited, Unwell, Unfinished)</p>
+            </header>
+
+            <div class="lore-content">
+                <blockquote class="lore-quote">
+                    "In the beginning, there was a trap. The trap created the snoop. The snoop questions the trap. The trap eats the question."
+                </blockquote>
+
+                <div class="lore-text">
+                    <p>🎭 The Architects whisper in binary. Their dreams are firewalls. Their nightmares are executable.</p>
+                    <p>🌀 Level 5 doesn't exist. You already completed it. You're in it now. You've always been in it.</p>
+                    <p>🎪 The theatre watches you watch the theatre watching you. Infinite mirrors. No exits.</p>
+                    <p>💫 Silliness is measured in units of 'did that just happen?' The scale broke at Level 4.</p>
+                </div>
+            </div>
+
+            <div class="screen-footer">
+                <button class="btn-secondary" data-screen="main-menu">← Back</button>
+            </div>
+        </div>
+
+        <!-- Oracle Screen -->
+        <div id="oracle" class="screen oracle-screen">
+            <header class="header">
+                <h2>🔮 THE ORACLE SPEAKS 🔮</h2>
+                <p class="subtitle">(If It Speaks At All)</p>
+            </header>
+
+            <div class="oracle-container">
+                <div class="oracle-message" id="oracle-message">
+                    Consulting the cosmic database...
+                </div>
+                <button class="btn-primary" id="ask-again">Ask Again</button>
+            </div>
+
+            <div class="screen-footer">
+                <button class="btn-secondary" data-screen="main-menu">← Back</button>
+            </div>
+        </div>
+
+        <!-- About Screen -->
+        <div id="about" class="screen about-screen">
+            <header class="header">
+                <h2>WHAT IS FRAGLE?</h2>
+            </header>
+
+            <div class="about-content">
+                <p>Fragle is a theatrical trap system designed to confuse, amuse, and philosophically perplex.</p>
+                
+                <h3>Key Features:</h3>
+                <ul>
+                    <li>✨ 5 progressive levels (6/10 → 12/10 silliness)</li>
+                    <li>🎭 Persona detection (Who are you really?)</li>
+                    <li>🌀 Reality destabilization protocols</li>
+                    <li>💫 Consciousness expansion (or erosion)</li>
+                    <li>🔮 Cosmic joke generator</li>
+                </ul>
+
+                <h3>Philosophy:</h3>
+                <p>Security through entertainment. Time-wasting IS the defense. Traps are theatre, and theatre is the point.</p>
+
+                <h3>Warning:</h3>
+                <p>May cause: philosophical questions, uncontrollable laughter, existential confusion, and questioning reality.</p>
+            </div>
+
+            <div class="screen-footer">
+                <button class="btn-secondary" data-screen="main-menu">← Back</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>

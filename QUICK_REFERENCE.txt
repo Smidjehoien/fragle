@@ -1,0 +1,180 @@
+╔══════════════════════════════════════════════════════════════════════════╗
+║                   FRAGLE THEATRE v2.0 - QUICK REFERENCE                  ║
+║                           (Keep This Nearby)                              ║
+╚══════════════════════════════════════════════════════════════════════════╝
+
+┌─ LAUNCH ────────────────────────────────────────────────────────────────┐
+│                                                                          │
+│  Shell UI (recommended):     bash fragle_tui.sh                          │
+│                                                                          │
+│  Web UI (browser):           npm start                                   │
+│  Then open:                  http://localhost:3000                       │
+│                                                                          │
+│  Electron (native .app):     npm run electron                            │
+│  Build for distribution:     npm run build                               │
+│                                                                          │
+│  View Leaderboard:           ./fragle_scoreboard.sh show                 │
+│  Get Stats (JSON):           ./fragle_scoreboard.sh stats                │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌─ MAIN MENU (in fragle_tui.sh) ───────────────────────────────────────────┐
+│                                                                          │
+│  1️⃣  Enter a Trap (Levels 1-5)                                          │
+│  2️⃣  Read the Lore                                                       │
+│  3️⃣  View Your Sessions                                                  │
+│  4️⃣  Your Persona Profile                                                │
+│  5️⃣  Launch Web UI                                                        │
+│  6️⃣  Ask the Oracle                                                       │
+│  7️⃣  Top 100 Leaderboard                                                  │
+│  8️⃣  Exit                                                                 │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌─ SCOREBOARD COMMANDS ───────────────────────────────────────────────────┐
+│                                                                          │
+│  ./fragle_scoreboard.sh show      Pretty leaderboard + stats             │
+│  ./fragle_scoreboard.sh stats     JSON output (for API)                  │
+│  ./fragle_scoreboard.sh personas  Top personas by frequency              │
+│  ./fragle_scoreboard.sh silliness Top moments (most unhinged)            │
+│  ./fragle_scoreboard.sh levels    Trap difficulty popularity            │
+│  ./fragle_scoreboard.sh feed 20   Live activity (last N events)         │
+│  ./fragle_scoreboard.sh heatmap   Activity by hour/persona (JSON)       │
+│  ./fragle_scoreboard.sh export F  Export stats for API to file F        │
+│  ./fragle_scoreboard.sh clear     Delete all local logs (amnesia!)      │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌─ PERSONAS (What You Might Be) ──────────────────────────────────────────┐
+│                                                                          │
+│  🟦 TECHNICAL       (Git, SSH, programming detected)                     │
+│  🟥 AGGRESSIVE      (Late night or high CPU load)                        │
+│  🟨 ARTISTIC        (Browser history or aesthetic signals)              │
+│  🟩 CURIOUS         (Exploration mode detected)                         │
+│  🟪 CHAOTIC         (Randomness or unusual patterns)                    │
+│  ⬜ UNKNOWN         (Can't determine, go with neutral)                   │
+│                                                                          │
+│  Each persona gets tailored theatre experience                          │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌─ SILLINESS SCALE ───────────────────────────────────────────────────────┐
+│                                                                          │
+│   6/10  ▓░░░░░░░░  Mild whimsy. Mostly normal.                          │
+│   7/10  ▓▓░░░░░░░  Getting weird.                                        │
+│   8/10  ▓▓▓░░░░░░  Definitely odd.                                       │
+│   9/10  ▓▓▓▓░░░░░  Very unhinged.                                        │
+│  10/10  ▓▓▓▓▓░░░░  Maximum chaos.                                        │
+│  11/10  ▓▓▓▓▓▓░░░  Beyond normal bounds.                                 │
+│  12/10  ▓▓▓▓▓▓▓▓▓  ABSOLUTE THEATRE.                                     │
+│                                                                          │
+│  Your silliness score is random each visit (6-12 range)                 │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌─ TRAP LEVELS ───────────────────────────────────────────────────────────┐
+│                                                                          │
+│  Level 1  (Easy)                                                        │
+│    └─ Introduction to chaos. Personas detected.                         │
+│                                                                          │
+│  Level 2  (Medium)                                                      │
+│    └─ Reality questions. Philosophy introduced.                        │
+│                                                                          │
+│  Level 3  (Hard)                                                        │
+│    └─ Existential challenges. Theatre deepens.                          │
+│                                                                          │
+│  Level 4  (Very Hard)                                                   │
+│    └─ Advanced absurdism. Memory tests.                                 │
+│                                                                          │
+│  Level 5  (Enlightened)                                                 │
+│    └─ Maximum theatre. Consciousness bends.                             │
+│                                                                          │
+│  [Chaos Mode] (Secret)                                                  │
+│    └─ All levels at once. Reality unstable.                             │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌─ PRIVACY ───────────────────────────────────────────────────────────────┐
+│                                                                          │
+│  ✓ TRACKED (Safe):                                                      │
+│    • Timestamp (when you entered)                                       │
+│    • Persona type (technical, chaotic, etc.)                            │
+│    • Trap level (1-5)                                                   │
+│    • Silliness score (6-12)                                             │
+│    • Duration (how long)                                                │
+│    • UUID hash (local only)                                             │
+│                                                                          │
+│  ✗ NEVER TRACKED:                                                       │
+│    ✗ Your name                                                          │
+│    ✗ Your IP address                                                    │
+│    ✗ Your hostname                                                      │
+│    ✗ Your file paths                                                    │
+│    ✗ System config                                                      │
+│    ✗ Real identity                                                      │
+│                                                                          │
+│  Clear logs anytime:  ./fragle_scoreboard.sh clear                      │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌─ FILES (Where Everything Lives) ───────────────────────────────────────┐
+│                                                                          │
+│  ~/fragle/fragle_tui.sh              Main shell theatre                 │
+│  ~/fragle/fragle_scoreboard.sh       Anonymous leaderboard             │
+│  ~/fragle/fragle_web.js              Web backend (Node.js)             │
+│  ~/fragle/public/                    Web frontend (HTML/CSS/JS)        │
+│  ~/fragle/main.js                    Electron wrapper                  │
+│  ~/fragle/GETTING_STARTED.txt        This guide (detailed)             │
+│  ~/fragle/README_v2.md               Full documentation                │
+│  ~/fragle/SCOREBOARD_GUIDE.md        Privacy + leaderboard docs       │
+│                                                                          │
+│  ~/.fragle_anon_data/                Your session logs (per visit)      │
+│  ~/.fragle_scoreboard/               Leaderboard activity logs         │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌─ TROUBLESHOOTING ───────────────────────────────────────────────────────┐
+│                                                                          │
+│  "bash: fragle_tui.sh: command not found"                              │
+│    → cd /home/nisse/fragle && bash fragle_tui.sh                        │
+│                                                                          │
+│  "Permission denied"                                                    │
+│    → chmod +x fragle_tui.sh fragle_scoreboard.sh                        │
+│                                                                          │
+│  "npm: command not found"                                               │
+│    → Node.js not installed (optional, shell UI works without it)        │
+│                                                                          │
+│  "Port 3000 already in use"                                             │
+│    → lsof -i :3000 && kill -9 <PID>                                     │
+│                                                                          │
+│  "No activity in leaderboard"                                           │
+│    → bash fragle_demo_scoreboard.sh  (seed test data)                   │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+
+┌─ ONE-LINER TO START ────────────────────────────────────────────────────┐
+│                                                                          │
+│  cd /home/nisse/fragle && bash fragle_tui.sh                            │
+│                                                                          │
+│  That's it. Theatre begins.                                             │
+│                                                                          │
+└──────────────────────────────────────────────────────────────────────────┘
+
+PHILOSOPHY
+═══════════════════════════════════════════════════════════════════════════
+
+  WIMP = Weak Interaction, Misdirection, Philosophy
+
+  The theatre:
+    • Wastes your time entertainingly
+    • Teaches through absurdism
+    • Protects your privacy
+    • Makes you question reality
+    • Is unforgettable
+
+  Core principle: "bleech their brains if they keep on"
+  (Let systems and people be chaotic while learning)
+
+═══════════════════════════════════════════════════════════════════════════
+
+                        Ready to enter the theatre?
+                       The show awaits. 🎭 🎪 🌀
